@@ -1,0 +1,65 @@
+// Rouge syntax highlighting — dark theme matching bg-code (#0f172a)
+.highlight {
+  .hll { background-color: #1e293b }
+  .c   { color: #64748b; font-style: italic }   // comment
+  .err { color: #f87171 }                         // error
+  .k   { color: #c084fc; font-weight: 600 }       // keyword
+  .l   { color: #34d399 }                         // literal
+  .n   { color: #e2e8f0 }                         // name
+  .o   { color: #94a3b8 }                         // operator
+  .p   { color: #94a3b8 }                         // punctuation
+  .cm  { color: #64748b; font-style: italic }     // comment.multiline
+  .cp  { color: #64748b }                         // comment.preproc
+  .c1  { color: #64748b; font-style: italic }     // comment.single
+  .cs  { color: #64748b; font-style: italic }     // comment.special
+  .gd  { color: #f87171 }                         // generic.deleted
+  .ge  { font-style: italic }
+  .gh  { color: #e2e8f0; font-weight: bold }
+  .gi  { color: #34d399 }                         // generic.inserted
+  .gp  { color: #64748b }                         // generic.prompt
+  .gs  { font-weight: bold }
+  .gu  { color: #38bdf8; font-weight: bold }
+  .kc  { color: #c084fc; font-weight: 600 }       // keyword.constant
+  .kd  { color: #c084fc; font-weight: 600 }       // keyword.declaration
+  .kn  { color: #c084fc; font-weight: 600 }       // keyword.namespace
+  .kp  { color: #c084fc }
+  .kr  { color: #c084fc; font-weight: 600 }
+  .kt  { color: #38bdf8 }                         // keyword.type
+  .ld  { color: #34d399 }
+  .m   { color: #fb923c }                         // literal.number
+  .s   { color: #34d399 }                         // literal.string
+  .na  { color: #38bdf8 }                         // name.attribute
+  .nb  { color: #38bdf8 }                         // name.builtin
+  .nc  { color: #38bdf8; font-weight: 600 }       // name.class
+  .nd  { color: #c084fc }                         // name.decorator
+  .ne  { color: #f87171; font-weight: 600 }       // name.exception
+  .nf  { color: #38bdf8 }                         // name.function
+  .nl  { color: #e2e8f0 }
+  .nn  { color: #38bdf8 }                         // name.namespace
+  .nx  { color: #38bdf8 }
+  .py  { color: #e2e8f0 }
+  .nt  { color: #f472b6 }                         // name.tag (HTML)
+  .nv  { color: #e2e8f0 }                         // name.variable
+  .ow  { color: #c084fc; font-weight: 600 }
+  .w   { color: #e2e8f0 }
+  .mf  { color: #fb923c }
+  .mh  { color: #fb923c }
+  .mi  { color: #fb923c }                         // literal.number.integer
+  .mo  { color: #fb923c }
+  .sb  { color: #34d399 }
+  .sc  { color: #34d399 }
+  .sd  { color: #64748b; font-style: italic }
+  .s2  { color: #34d399 }                         // literal.string.double
+  .se  { color: #fb923c; font-weight: 600 }
+  .sh  { color: #34d399 }
+  .si  { color: #fb923c }
+  .sx  { color: #34d399 }
+  .sr  { color: #34d399 }
+  .s1  { color: #34d399 }                         // literal.string.single
+  .ss  { color: #34d399 }
+  .bp  { color: #38bdf8 }
+  .vc  { color: #e2e8f0 }
+  .vg  { color: #e2e8f0 }
+  .vi  { color: #e2e8f0 }
+  .il  { color: #fb923c }
+}

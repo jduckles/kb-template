@@ -1,0 +1,15 @@
+---
+---
+// ─── To customize brand colors, edit the `brand:` section in _config.yml ──────
+// ─── For deeper overrides, add CSS custom property declarations here: ──────────
+// :root {
+//   --brand-primary: #your-color;
+//   --brand-accent:  #your-accent;
+//   --bg:            #your-bg;
+// }
+
+@import "variables";
+@import "base";
+@import "layout";
+@import "components";
+@import "syntax";

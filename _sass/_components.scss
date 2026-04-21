@@ -1,0 +1,386 @@
+// ─── Search ───────────────────────────────────────────────────────────────────
+.search-wrap {
+  position: relative;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.search-icon {
+  position: absolute;
+  left: $sp4;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: rgba(255,255,255,.6);
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: $sp3 $sp4 $sp3 $sp10;
+  font-family: $font-sans;
+  font-size: 1rem;
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: $r-full;
+  color: #fff;
+  outline: none;
+  transition: background $t-fast, border-color $t-fast, box-shadow $t-fast;
+  backdrop-filter: blur(4px);
+
+  &::placeholder { color: rgba(255,255,255,.6); }
+  &:focus {
+    background: rgba(255,255,255,.25);
+    border-color: rgba(255,255,255,.6);
+    box-shadow: 0 0 0 3px rgba(255,255,255,.15);
+  }
+}
+
+// ─── Tag pill ─────────────────────────────────────────────────────────────────
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 10px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  border-radius: $r-full;
+  background: color-mix(in srgb, var(--tag-color, var(--brand-primary)) 12%, transparent);
+  color: color-mix(in srgb, var(--tag-color, var(--brand-primary)) 90%, #000);
+  border: 1px solid color-mix(in srgb, var(--tag-color, var(--brand-primary)) 25%, transparent);
+  cursor: pointer;
+  transition: background $t-fast, transform $t-fast;
+  white-space: nowrap;
+
+  &:hover {
+    background: color-mix(in srgb, var(--tag-color, var(--brand-primary)) 20%, transparent);
+    transform: translateY(-1px);
+  }
+
+  &.is-active {
+    background: var(--tag-color, var(--brand-primary));
+    color: #fff;
+    border-color: transparent;
+  }
+}
+
+// ─── Tag cloud ────────────────────────────────────────────────────────────────
+.tag-cloud-section {
+  margin-bottom: $sp12;
+}
+
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $sp2;
+  align-items: center;
+}
+
+.tag-filter {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  border-radius: $r-full;
+  background: var(--bg-alt);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font-family: $font-sans;
+  transition: all $t-fast;
+
+  &:hover, &.is-active {
+    background: var(--brand-primary);
+    color: #fff;
+    border-color: transparent;
+  }
+}
+
+// ─── Article card ─────────────────────────────────────────────────────────────
+.article-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: $r-lg;
+  padding: $sp6;
+  text-decoration: none;
+  color: var(--text);
+  transition: box-shadow $t-base, transform $t-base, border-color $t-base;
+  height: 100%;
+
+  &:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,.1);
+    transform: translateY(-2px);
+    border-color: var(--brand-primary);
+    text-decoration: none;
+    color: var(--text);
+  }
+}
+
+.article-card__emoji {
+  font-size: 2.25rem;
+  line-height: 1;
+  margin-bottom: $sp4;
+}
+
+.article-card__title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0 0 $sp2;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.article-card__desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: $sp4;
+  flex: 1;
+  line-height: 1.6;
+}
+
+.article-card__meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: $sp2;
+  margin-top: auto;
+}
+
+// ─── Badges (difficulty / status) ─────────────────────────────────────────────
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  border-radius: $r-full;
+  svg { width: 11px; height: 11px; }
+}
+
+.badge--beginner      { background: color-mix(in srgb, var(--diff-beginner) 12%, transparent); color: var(--diff-beginner); border: 1px solid color-mix(in srgb, var(--diff-beginner) 30%, transparent); }
+.badge--intermediate  { background: color-mix(in srgb, var(--diff-intermediate) 12%, transparent); color: var(--diff-intermediate); border: 1px solid color-mix(in srgb, var(--diff-intermediate) 30%, transparent); }
+.badge--advanced      { background: color-mix(in srgb, var(--diff-advanced) 12%, transparent); color: var(--diff-advanced); border: 1px solid color-mix(in srgb, var(--diff-advanced) 30%, transparent); }
+.badge--outdated      { background: color-mix(in srgb, #94a3b8 15%, transparent); color: #64748b; border: 1px solid #e2e8f0; }
+
+// ─── Callouts ─────────────────────────────────────────────────────────────────
+.callout {
+  border-radius: $r-md;
+  padding: $sp4 $sp6;
+  margin: $sp6 0;
+  border-left: 4px solid;
+  font-size: 0.95rem;
+
+  // title row
+  > strong:first-child, > p > strong:first-child {
+    display: block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    margin-bottom: $sp2;
+    opacity: .75;
+  }
+
+  p:last-child { margin-bottom: 0; }
+  code:not(pre code) { border: 1px solid currentColor; opacity: .8; }
+}
+
+.callout-note   { background: color-mix(in srgb, var(--callout-note) 8%, transparent);   border-color: var(--callout-note);   color: color-mix(in srgb, var(--callout-note) 85%, #000); }
+.callout-tip    { background: color-mix(in srgb, var(--callout-tip) 8%, transparent);    border-color: var(--callout-tip);    color: color-mix(in srgb, var(--callout-tip) 85%, #000); }
+.callout-warn   { background: color-mix(in srgb, var(--callout-warn) 10%, transparent);  border-color: var(--callout-warn);   color: color-mix(in srgb, var(--callout-warn) 80%, #000); }
+.callout-danger { background: color-mix(in srgb, var(--callout-danger) 8%, transparent); border-color: var(--callout-danger); color: color-mix(in srgb, var(--callout-danger) 85%, #000); }
+.callout-quote  { background: color-mix(in srgb, var(--callout-quote) 8%, transparent);  border-color: var(--callout-quote);  color: color-mix(in srgb, var(--callout-quote) 85%, #000); }
+
+// ─── Code blocks ──────────────────────────────────────────────────────────────
+.highlight-wrap {
+  position: relative;
+  margin: $sp6 0;
+}
+
+.highlight {
+  background: var(--bg-code) !important;
+  border-radius: $r-lg;
+  overflow: hidden;
+  margin: 0;
+
+  pre {
+    overflow-x: auto;
+    padding: $sp6;
+    margin: 0;
+    background: transparent !important;
+    font-family: $font-mono;
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: #e2e8f0;
+  }
+}
+
+// Language label
+.highlight[data-lang]::before {
+  content: attr(data-lang);
+  display: block;
+  padding: $sp2 $sp4;
+  background: rgba(255,255,255,.06);
+  font-family: $font-mono;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: #94a3b8;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.copy-btn {
+  position: absolute;
+  top: $sp2;
+  right: $sp2;
+  padding: $sp1 $sp3;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: $r-sm;
+  color: #94a3b8;
+  font-family: $font-sans;
+  font-size: 0.72rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all $t-fast;
+  display: inline-flex;
+  align-items: center;
+  gap: $sp1;
+  svg { width: 12px; height: 12px; }
+  &:hover { background: rgba(255,255,255,.2); color: #e2e8f0; }
+  &.copied { background: color-mix(in srgb, var(--callout-tip) 25%, transparent); color: var(--callout-tip); border-color: var(--callout-tip); }
+}
+
+// ─── Table of contents ────────────────────────────────────────────────────────
+.toc {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: $r-lg;
+  padding: $sp4 $sp6;
+  margin-bottom: $sp6;
+}
+
+.toc__title {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--text-muted);
+  margin: 0 0 $sp3;
+  display: flex;
+  align-items: center;
+  gap: $sp2;
+  svg { width: 13px; height: 13px; }
+}
+
+#toc-nav {
+  ol { list-style: none; margin: 0; padding: 0; }
+  li { margin: $sp1 0; }
+  a {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    display: block;
+    padding: 1px 0;
+    border-left: 2px solid transparent;
+    padding-left: $sp3;
+    transition: color $t-fast, border-color $t-fast;
+    &:hover { color: var(--brand-primary); text-decoration: none; border-left-color: var(--brand-primary); }
+    &.toc-active { color: var(--brand-primary); border-left-color: var(--brand-primary); font-weight: 500; }
+  }
+  // h3 indentation
+  ol ol a { padding-left: $sp6; font-size: 0.82rem; }
+}
+
+// ─── Related articles ─────────────────────────────────────────────────────────
+.related-articles {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: $r-lg;
+  padding: $sp4 $sp6;
+}
+
+.related-articles__title {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--text-muted);
+  margin: 0 0 $sp3;
+  display: flex;
+  align-items: center;
+  gap: $sp2;
+  svg { width: 13px; height: 13px; }
+}
+
+.related-articles__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  li { margin-bottom: $sp2; }
+  a {
+    font-size: 0.875rem;
+    color: var(--text);
+    display: flex;
+    align-items: baseline;
+    gap: $sp2;
+    &:hover { color: var(--brand-primary); text-decoration: none; }
+  }
+}
+
+// ─── Tags page ────────────────────────────────────────────────────────────────
+.tags-page {
+  max-width: $content-width;
+  margin: 0 auto;
+  padding: $sp12 $sp6;
+}
+
+.tag-group {
+  margin-bottom: $sp8;
+}
+
+.tag-group__header {
+  display: flex;
+  align-items: center;
+  gap: $sp3;
+  margin-bottom: $sp4;
+  padding-bottom: $sp3;
+  border-bottom: 1px solid var(--border);
+}
+
+.tag-group__count {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: normal;
+}
+
+.tag-group__articles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $sp2;
+}
+
+.tag-group__article {
+  display: flex;
+  align-items: center;
+  gap: $sp3;
+  font-size: 0.925rem;
+  .emoji { font-size: 1.1rem; }
+}
+
+// ─── No results ───────────────────────────────────────────────────────────────
+.no-results {
+  text-align: center;
+  color: var(--text-muted);
+  padding: $sp12;
+  font-size: 1rem;
+}

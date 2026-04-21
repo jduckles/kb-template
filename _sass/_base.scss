@@ -1,0 +1,130 @@
+// ─── CSS Custom Properties ────────────────────────────────────────────────────
+:root {
+  // Brand (overridden by _config.yml injection in head.html)
+  --brand-primary:   #6366f1;
+  --brand-accent:    #f59e0b;
+
+  // Surfaces
+  --bg:              #ffffff;
+  --bg-alt:          #f8fafc;
+  --bg-code:         #0f172a;
+  --surface:         #ffffff;
+  --border:          #e2e8f0;
+  --border-focus:    var(--brand-primary);
+
+  // Text
+  --text:            #0f172a;
+  --text-muted:      #64748b;
+  --text-inv:        #ffffff;
+  --link:            var(--brand-primary);
+  --link-hover:      color-mix(in srgb, var(--brand-primary) 80%, black);
+
+  // Callout colors
+  --callout-note:    #3b82f6;
+  --callout-tip:     #10b981;
+  --callout-warn:    #f59e0b;
+  --callout-danger:  #ef4444;
+  --callout-quote:   #8b5cf6;
+
+  // Difficulty badge colors
+  --diff-beginner:      #10b981;
+  --diff-intermediate:  #f59e0b;
+  --diff-advanced:      #ef4444;
+}
+
+// ─── Reset ────────────────────────────────────────────────────────────────────
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: $font-sans;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+// ─── Typography ───────────────────────────────────────────────────────────────
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text);
+  margin-top: $sp8;
+  margin-bottom: $sp3;
+  &:first-child { margin-top: 0; }
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1.1rem; }
+
+p { margin-bottom: $sp4; }
+
+a {
+  color: var(--link);
+  text-decoration: none;
+  &:hover { color: var(--link-hover); text-decoration: underline; }
+}
+
+ul, ol {
+  margin: 0 0 $sp4 $sp6;
+  li { margin-bottom: $sp1; }
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: $sp8 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: $sp6;
+  font-size: 0.9rem;
+  th, td {
+    text-align: left;
+    padding: $sp2 $sp4;
+    border-bottom: 1px solid var(--border);
+  }
+  th {
+    font-weight: 600;
+    background: var(--bg-alt);
+    color: var(--text);
+  }
+  tr:hover td { background: var(--bg-alt); }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: $r-md;
+}
+
+strong { font-weight: 600; }
+
+blockquote {
+  border-left: 3px solid var(--brand-primary);
+  padding: $sp3 $sp4 $sp3 $sp6;
+  margin: $sp6 0;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+// ─── Inline code ──────────────────────────────────────────────────────────────
+code:not(pre code) {
+  font-family: $font-mono;
+  font-size: 0.875em;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: $r-sm;
+  padding: 0.15em 0.4em;
+  color: var(--brand-primary);
+}
