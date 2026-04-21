@@ -2,6 +2,9 @@
 # Add tags here to give them a color and emoji. Any tag used in an article
 # front matter that is NOT listed here will still display, just without color.
 #
+# After editing this file run:  ruby bin/sync-tags
+# That script creates/removes the _tags/*.md stubs that generate tag pages.
+#
 # Fields:
 #   name:        slug used in article front matter (lowercase, hyphenated)
 #   label:       human-readable display label

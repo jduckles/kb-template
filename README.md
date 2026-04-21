@@ -80,6 +80,14 @@ Types: `callout-note` · `callout-tip` · `callout-warn` · `callout-danger` · 
 
 ## Tags
 
+Tags are defined in `_data/tags.yml`. After adding or removing tags, run:
+
+```bash
+ruby bin/sync-tags
+```
+
+This creates/removes the `_tags/*.md` stub files that Jekyll needs to generate individual tag pages at `/tags/<name>/`. Commit both the `_data/tags.yml` change and any new `_tags/` files together.
+
 Tags are defined in `_data/tags.yml`:
 
 ```yaml

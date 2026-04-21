@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+# Generates a _tags/<name>.md stub for every tag in _data/tags.yml.
+# Run this after adding or removing tags from _data/tags.yml.
+#
+# Usage: ruby bin/sync-tags
+
+require 'yaml'
+
+tags_data = YAML.load_file(File.join(__dir__, '..', '_data', 'tags.yml'))
+tags_dir  = File.join(__dir__, '..', '_tags')
+Dir.mkdir(tags_dir) unless Dir.exist?(tags_dir)
+
+existing = Dir[File.join(tags_dir, '*.md')].map { |f| File.basename(f, '.md') }
+current  = tags_data.map { |t| t['name'] }
+
+added   = current - existing
+removed = existing - current
+
+added.each do |name|
+  tag = tags_data.find { |t| t['name'] == name }
+  path = File.join(tags_dir, "#{name}.md")
+  File.write(path, "---\ntag: #{name}\ntitle: \"#{tag['label'] || name}\"\n---\n")
+  puts "  added  _tags/#{name}.md"
+end
+
+removed.each do |name|
+  path = File.join(tags_dir, "#{name}.md")
+  File.delete(path)
+  puts "  removed _tags/#{name}.md"
+end
+
+if added.empty? && removed.empty?
+  puts "  _tags/ is already in sync with _data/tags.yml"
+else
+  puts "\nDone. #{added.size} added, #{removed.size} removed."
+end
