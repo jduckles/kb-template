@@ -3,7 +3,7 @@ layout: default
 title: About
 permalink: /about/
 ---
-<div style="max-width: 680px; margin: 0 auto; padding: 3rem 1.5rem;">
+<div class="prose-page" markdown="1">
 
 # About This Knowledge Base
 
