@@ -15,6 +15,11 @@ brand:
   header_dark: false         # true = dark header bg (uses primary color)
   org_name: "Your Organization"
 
+# ─── GitHub integration ───────────────────────────────────────────────────────
+github:
+  repo: "https://github.com/jduckles/kb-template"
+  branch: main
+
 # ─── Navigation ───────────────────────────────────────────────────────────────
 nav_links:
   - title: "All Tags"

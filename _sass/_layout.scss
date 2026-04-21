@@ -173,6 +173,36 @@
   margin: 0 0 $sp8;
   padding-bottom: $sp8;
   border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.edit-on-github {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: $sp1;
+  padding: $sp1 $sp3;
+  border-radius: $r-md;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  opacity: .45;
+  transition: opacity $t-fast, background $t-fast, color $t-fast;
+  svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    flex-shrink: 0;
+  }
+  &:hover {
+    opacity: 1;
+    background: var(--bg-alt);
+    color: var(--text);
+    text-decoration: none;
+  }
 }
 
 .article-header__back {
