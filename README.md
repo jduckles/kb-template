@@ -1,3 +1,5 @@
+*🚧 Vibe coded with no offer of ongoing maintenence or support*
+
 # KB Template
 
 A Jekyll knowledge base template for communities of practice. Deploy to GitHub Pages in minutes.
