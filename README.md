@@ -1,4 +1,4 @@
-*🚧 Vibe coded with no offer of ongoing maintenence or support*
+*🚧 Vibe coded with no offer of ongoing maintenence or support, take it and do what you will with it under the MIT license on it*
 
 # KB Template
 
