@@ -1,0 +1,18 @@
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <span class="site-footer__brand">
+      {% if site.brand.org_name %}{{ site.brand.org_name }}{% else %}{{ site.title }}{% endif %}
+    </span>
+    <span class="site-footer__sep">·</span>
+    <span class="site-footer__license">
+      Content available under community license &nbsp;·&nbsp;
+      Template <a href="https://github.com/your-org/kb-template" target="_blank" rel="noopener">MIT licensed</a>
+    </span>
+    {% if site.feed_path %}
+    <span class="site-footer__sep">·</span>
+    <a class="site-footer__feed" href="{{ site.feed_path | relative_url }}">
+      <i data-feather="rss"></i> Feed
+    </a>
+    {% endif %}
+  </div>
+</footer>

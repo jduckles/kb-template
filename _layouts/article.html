@@ -1,0 +1,74 @@
+---
+layout: default
+---
+<div class="article-page">
+
+  <div class="article-header">
+    <a class="article-header__back" href="{{ '/' | relative_url }}">
+      <i data-feather="arrow-left"></i> Back
+    </a>
+    <div class="article-header__emoji" aria-hidden="true">{{ page.emoji | default: "📄" }}</div>
+    <h1 class="article-header__title">{{ page.title }}</h1>
+    {% if page.description %}
+      <p class="article-header__desc">{{ page.description }}</p>
+    {% endif %}
+    <div class="article-header__meta">
+      {% if page.difficulty %}
+        <span class="badge badge--{{ page.difficulty }}">
+          <i data-feather="bar-chart-2"></i> {{ page.difficulty }}
+        </span>
+      {% endif %}
+      {% if page.status == "outdated" %}
+        <span class="badge badge--outdated"><i data-feather="alert-triangle"></i> outdated</span>
+      {% endif %}
+      {% if page.date %}
+        <span class="article-meta__date">
+          <i data-feather="calendar"></i>
+          <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
+        </span>
+      {% endif %}
+      {% if page.author %}
+        <span class="article-meta__author"><i data-feather="user"></i> {{ page.author }}</span>
+      {% endif %}
+    </div>
+    {% if page.tags %}
+    <div class="article-header__tags">
+      {% for tag in page.tags %}
+        {% include tag-pill.html tag=tag %}
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="article-layout">
+    <article class="article-content" id="article-content">
+      {{ content }}
+    </article>
+
+    <aside class="article-sidebar">
+      <div class="toc" id="toc">
+        <h3 class="toc__title"><i data-feather="list"></i> On this page</h3>
+        <nav id="toc-nav" aria-label="Table of contents"></nav>
+      </div>
+
+      {% if page.related %}
+      <div class="related-articles">
+        <h3 class="related-articles__title"><i data-feather="link"></i> Related</h3>
+        <ul class="related-articles__list">
+          {% for slug in page.related %}
+            {% assign rel = site.articles | where_exp: "a", "a.path contains slug" | first %}
+            {% if rel %}
+            <li>
+              <a href="{{ rel.url | relative_url }}">
+                {{ rel.emoji | default: "📄" }} {{ rel.title }}
+              </a>
+            </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </aside>
+  </div>
+
+</div>

@@ -1,0 +1,29 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+{% if page.description %}<meta name="description" content="{{ page.description }}">{% elsif site.description %}<meta name="description" content="{{ site.description }}">{% endif %}
+{% seo %}
+
+<!-- Fonts: Inter + JetBrains Mono -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Feather Icons -->
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js" defer></script>
+
+<!-- Styles -->
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+
+<!-- Brand color injection from _config.yml -->
+{% if site.brand.primary or site.brand.accent %}
+<style>
+:root {
+  {% if site.brand.primary %}--brand-primary: {{ site.brand.primary }};
+  --brand-primary-rgb: {{ site.brand.primary | remove: '#' }};{% endif %}
+  {% if site.brand.accent %}--brand-accent: {{ site.brand.accent }};{% endif %}
+}
+</style>
+{% endif %}
+
+{% if site.brand.favicon %}<link rel="icon" href="{{ site.brand.favicon | relative_url }}">{% endif %}

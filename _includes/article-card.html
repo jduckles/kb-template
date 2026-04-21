@@ -1,0 +1,20 @@
+{% assign art = include.article %}
+<a class="article-card" href="{{ art.url | relative_url }}">
+  <div class="article-card__emoji" aria-hidden="true">{{ art.emoji | default: "📄" }}</div>
+  <div class="article-card__body">
+    <h2 class="article-card__title">{{ art.title }}</h2>
+    {% if art.description %}
+      <p class="article-card__desc">{{ art.description }}</p>
+    {% endif %}
+    <div class="article-card__meta">
+      {% if art.difficulty %}
+        <span class="badge badge--{{ art.difficulty }}">{{ art.difficulty }}</span>
+      {% endif %}
+      {% if art.tags %}
+        {% for tag in art.tags limit:4 %}
+          {% include tag-pill.html tag=tag %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</a>

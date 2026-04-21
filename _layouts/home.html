@@ -1,0 +1,55 @@
+---
+layout: default
+---
+<div class="hero">
+  <div class="hero__inner">
+    <h1 class="hero__title">{{ site.title }}</h1>
+    <p class="hero__tagline">{{ site.tagline }}</p>
+    <div class="search-wrap">
+      <i data-feather="search" class="search-icon"></i>
+      <input type="search" id="kb-search" class="search-input"
+             placeholder="Search articles…" aria-label="Search knowledge base">
+    </div>
+  </div>
+</div>
+
+<div class="home-content">
+
+  <!-- Tag cloud -->
+  {% assign all_tags = site.articles | map: "tags" | join: "," | split: "," | uniq | sort %}
+  {% if all_tags.size > 0 %}
+  <section class="tag-cloud-section">
+    <h2 class="section-title"><i data-feather="tag"></i> Browse by Tag</h2>
+    <div class="tag-cloud" id="tag-filter-bar">
+      <button class="tag-filter is-active" data-filter="all">All</button>
+      {% for tag in all_tags %}
+        {% assign tag_trim = tag | strip %}
+        {% if tag_trim != "" %}
+          {% include tag-pill.html tag=tag_trim %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- Article grid -->
+  <section class="articles-section">
+    <h2 class="section-title"><i data-feather="book-open"></i> Articles</h2>
+    <div class="article-grid" id="article-grid">
+      {% assign published = site.articles | where: "status", "published" %}
+      {% assign drafts_excluded = site.articles | where_exp: "item", "item.status != 'draft'" %}
+      {% assign articles_sorted = site.articles | sort: "title" %}
+      {% for article in articles_sorted %}
+        {% unless article.status == "draft" %}
+        <div class="article-grid__item" data-tags="{{ article.tags | join: ' ' }}" data-title="{{ article.title | downcase }}">
+          {% include article-card.html article=article %}
+        </div>
+        {% endunless %}
+      {% endfor %}
+    </div>
+    <p class="no-results" id="no-results" hidden>No articles match your search.</p>
+  </section>
+
+</div>
+
+{{ content }}
