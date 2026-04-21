@@ -1,0 +1,76 @@
+# ─── Site Identity ────────────────────────────────────────────────────────────
+title: "Community Knowledge Base"
+tagline: "Learn, share, grow together"
+description: "A collaborative knowledge base for your community of practice."
+baseurl: ""   # set to "/repo-name" for GitHub Pages project sites
+url: ""       # e.g., "https://yourorg.github.io"
+
+# ─── Branding ─────────────────────────────────────────────────────────────────
+# All colors accept any valid CSS color value (hex, hsl, rgb, named)
+brand:
+  logo: ""                   # path to logo image, e.g. /assets/images/logo.svg
+  favicon: ""                # path to favicon, e.g. /assets/images/favicon.ico
+  primary: "#6366f1"         # primary brand color (headers, links, accents)
+  accent: "#f59e0b"          # accent / highlight color
+  header_dark: false         # true = dark header bg (uses primary color)
+  org_name: "Your Organization"
+
+# ─── Navigation ───────────────────────────────────────────────────────────────
+nav_links:
+  - title: "All Tags"
+    url: "/tags/"
+  - title: "About"
+    url: "/about/"
+
+# ─── Author ───────────────────────────────────────────────────────────────────
+author:
+  name: "Your Community"
+  email: ""
+  url: ""
+
+# ─── Collections ──────────────────────────────────────────────────────────────
+collections:
+  articles:
+    output: true
+    permalink: /:name/
+    sort_by: title
+
+defaults:
+  - scope:
+      path: ""
+      type: articles
+    values:
+      layout: article
+      status: published
+
+# ─── Plugins ──────────────────────────────────────────────────────────────────
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# ─── Markdown ─────────────────────────────────────────────────────────────────
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: "highlight"
+    block:
+      line_numbers: false
+
+# ─── Sass ─────────────────────────────────────────────────────────────────────
+sass:
+  sass_dir: _sass
+  style: compressed
+
+# ─── Exclusions ───────────────────────────────────────────────────────────────
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/
+  - .git/
+  - README.md
+  - starting_prompt.md
