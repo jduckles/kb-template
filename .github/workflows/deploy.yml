@@ -18,7 +18,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true   # opt into Node 24 now
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   build:
@@ -27,14 +27,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3"
-          bundler-cache: true  # caches gems between runs
+          bundler-cache: true
 
       - name: Build site
-        run: bundle exec jekyll build --destination _site
+        # base_path is empty for user/org sites, /repo-name for project sites.
+        # Passing it via --baseurl means _config.yml doesn't need to change
+        # between local dev and CI.
+        run: bundle exec jekyll build --destination _site --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
 
