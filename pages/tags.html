@@ -1,0 +1,43 @@
+---
+layout: default
+title: All Tags
+permalink: /tags/
+---
+<div class="tags-page">
+  <h1>Browse by Tag</h1>
+  <p style="color: var(--text-muted); margin-bottom: 2rem;">
+    {{ site.articles.size }} articles across {{ site.data.tags.size }} curated tags.
+  </p>
+
+  {% assign all_tags = site.articles | map: "tags" | join: "," | split: "," | uniq | sort %}
+  {% for tag_name in all_tags %}
+    {% assign tag_name_trim = tag_name | strip %}
+    {% if tag_name_trim == "" %}{% continue %}{% endif %}
+    {% assign tag_data = site.data.tags | where: "name", tag_name_trim | first %}
+    {% assign tag_articles = site.articles | where_exp: "a", "a.tags contains tag_name_trim" | sort: "title" %}
+    {% if tag_articles.size == 0 %}{% continue %}{% endif %}
+
+    <div class="tag-group">
+      <div class="tag-group__header">
+        {% include tag-pill.html tag=tag_name_trim %}
+        <span class="tag-group__count">{{ tag_articles.size }} article{% if tag_articles.size != 1 %}s{% endif %}</span>
+        {% if tag_data.description %}
+          <span style="color: var(--text-muted); font-size: 0.875rem;">— {{ tag_data.description }}</span>
+        {% endif %}
+      </div>
+      <ul class="tag-group__articles">
+        {% for article in tag_articles %}
+          {% unless article.status == "draft" %}
+          <li class="tag-group__article">
+            <span class="emoji">{{ article.emoji | default: "📄" }}</span>
+            <a href="{{ article.url | relative_url }}">{{ article.title }}</a>
+            {% if article.difficulty %}
+              <span class="badge badge--{{ article.difficulty }}">{{ article.difficulty }}</span>
+            {% endif %}
+          </li>
+          {% endunless %}
+        {% endfor %}
+      </ul>
+    </div>
+  {% endfor %}
+</div>

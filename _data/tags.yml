@@ -1,0 +1,139 @@
+# ─── Tag Registry ─────────────────────────────────────────────────────────────
+# Add tags here to give them a color and emoji. Any tag used in an article
+# front matter that is NOT listed here will still display, just without color.
+#
+# Fields:
+#   name:        slug used in article front matter (lowercase, hyphenated)
+#   label:       human-readable display label
+#   color:       any valid CSS color
+#   emoji:       optional leading emoji
+#   description: shown on the tags index page
+
+# ─── Languages & Runtimes ────────────────────────────────────────────────────
+- name: python
+  label: Python
+  color: "#3776ab"
+  emoji: "🐍"
+  description: Python programming language
+
+- name: javascript
+  label: JavaScript
+  color: "#f7df1e"
+  emoji: "⚡"
+  description: JavaScript and Node.js
+
+- name: typescript
+  label: TypeScript
+  color: "#3178c6"
+  emoji: "🔷"
+  description: Typed JavaScript
+
+- name: bash
+  label: Bash
+  color: "#4eaa25"
+  emoji: "🐚"
+  description: Shell scripting
+
+- name: sql
+  label: SQL
+  color: "#e38c00"
+  emoji: "🗃️"
+  description: SQL databases and queries
+
+- name: r
+  label: R
+  color: "#276dc3"
+  emoji: "📊"
+  description: R statistical computing
+
+# ─── Tools & Platforms ───────────────────────────────────────────────────────
+- name: git
+  label: Git
+  color: "#f05032"
+  emoji: "🔀"
+  description: Version control with Git
+
+- name: docker
+  label: Docker
+  color: "#2496ed"
+  emoji: "🐳"
+  description: Containers and Docker
+
+- name: github
+  label: GitHub
+  color: "#24292f"
+  emoji: "🐙"
+  description: GitHub platform and Actions
+
+- name: linux
+  label: Linux
+  color: "#fcc624"
+  emoji: "🐧"
+  description: Linux systems
+
+- name: vscode
+  label: VS Code
+  color: "#007acc"
+  emoji: "🖥️"
+  description: Visual Studio Code
+
+# ─── Topics ──────────────────────────────────────────────────────────────────
+- name: best-practices
+  label: Best Practices
+  color: "#8b5cf6"
+  emoji: "✨"
+  description: Patterns and conventions worth following
+
+- name: testing
+  label: Testing
+  color: "#10b981"
+  emoji: "🧪"
+  description: Testing strategies and frameworks
+
+- name: security
+  label: Security
+  color: "#ef4444"
+  emoji: "🔒"
+  description: Security practices
+
+- name: performance
+  label: Performance
+  color: "#f59e0b"
+  emoji: "⚡"
+  description: Optimization and performance
+
+- name: data
+  label: Data
+  color: "#06b6d4"
+  emoji: "📊"
+  description: Data processing and analysis
+
+- name: api
+  label: APIs
+  color: "#ec4899"
+  emoji: "🔌"
+  description: API design and consumption
+
+- name: documentation
+  label: Documentation
+  color: "#64748b"
+  emoji: "📝"
+  description: Writing and maintaining docs
+
+- name: onboarding
+  label: Onboarding
+  color: "#6366f1"
+  emoji: "👋"
+  description: Getting up to speed
+
+- name: workflow
+  label: Workflow
+  color: "#0ea5e9"
+  emoji: "🔄"
+  description: Development workflows and productivity
+
+- name: debugging
+  label: Debugging
+  color: "#d97706"
+  emoji: "🐛"
+  description: Finding and fixing bugs
