@@ -93,21 +93,23 @@
     }
   }
 
-  // ── Homepage: tag filtering ─────────────────────────────────────────────────
-  const tagFilterBar = document.getElementById('tag-filter-bar');
-  const articleGrid = document.getElementById('article-grid');
-  const noResults = document.getElementById('no-results');
+  // ── Shared filter state ─────────────────────────────────────────────────────
+  const tagFilterBar  = document.getElementById('tag-filter-bar');
+  const articleGrid   = document.getElementById('article-grid');
+  const noResults     = document.getElementById('no-results');
+  const searchInput   = document.getElementById('kb-search');
 
-  function applyFilter(filter, query) {
+  let activeTagFilter = 'all';
+  let currentMatchIds = null;   // null = no search active; Set = Lunr result URLs
+
+  function render() {
     if (!articleGrid) return;
     const items = articleGrid.querySelectorAll('.article-grid__item');
     let visible = 0;
     items.forEach(function (item) {
       const tags = (item.dataset.tags || '').split(' ');
-      const title = item.dataset.title || '';
-      const desc  = item.dataset.description || '';
-      const matchTag = filter === 'all' || tags.includes(filter);
-      const matchSearch = !query || title.includes(query) || desc.includes(query) || (item.dataset.tags || '').includes(query);
+      const matchTag    = activeTagFilter === 'all' || tags.includes(activeTagFilter);
+      const matchSearch = currentMatchIds === null || currentMatchIds.has(item.dataset.url || '');
       const show = matchTag && matchSearch;
       item.style.display = show ? '' : 'none';
       if (show) visible++;
@@ -115,60 +117,103 @@
     if (noResults) noResults.hidden = visible > 0;
   }
 
-  if (tagFilterBar && articleGrid) {
-    let activeFilter = 'all';
+  // ── Lunr full-text search ────────────────────────────────────────────────
+  let lunrIndex  = null;
+  let indexState = 'idle';   // idle | loading | ready
 
-    // Tag pills in filter bar act as filter buttons
+  function initIndex(docs) {
+    lunrIndex = lunr(function () {
+      this.ref('id');
+      this.field('title',       { boost: 10 });
+      this.field('tags',        { boost: 8  });
+      this.field('description', { boost: 5  });
+      this.field('content');
+      docs.forEach(function (doc) { this.add(doc); }, this);
+    });
+    indexState = 'ready';
+  }
+
+  function loadIndex(cb) {
+    if (indexState === 'ready')   { cb(); return; }
+    if (indexState === 'loading') { return; }
+    indexState = 'loading';
+    fetch(window.KB_SEARCH_INDEX || '/search.json')
+      .then(function (r) { return r.json(); })
+      .then(function (docs) { initIndex(docs); cb(); })
+      .catch(function (e) {
+        console.warn('KB: search index unavailable', e);
+        indexState = 'idle';
+      });
+  }
+
+  function lunrSearch(query) {
+    if (!lunrIndex || !query) return null;
+    try {
+      // Append * to the last term so results appear as the user types
+      const terms = query.trim().split(/\s+/);
+      const q = terms.map(function (t, i) {
+        return i === terms.length - 1 ? t + '*' : t;
+      }).join(' ');
+      return new Set(lunrIndex.search(q).map(function (r) { return r.ref; }));
+    } catch (_) {
+      try {
+        return new Set(lunrIndex.search(query).map(function (r) { return r.ref; }));
+      } catch (__) { return new Set(); }
+    }
+  }
+
+  // ── Tag filter bar ───────────────────────────────────────────────────────
+  if (tagFilterBar) {
     tagFilterBar.addEventListener('click', function (e) {
-      const pill = e.target.closest('[data-tag]');
+      const pill   = e.target.closest('[data-tag]');
       const allBtn = e.target.closest('.tag-filter[data-filter="all"]');
 
       if (allBtn) {
-        activeFilter = 'all';
+        activeTagFilter = 'all';
         tagFilterBar.querySelectorAll('.tag.is-active').forEach(function (t) { t.classList.remove('is-active'); });
         allBtn.classList.add('is-active');
-        applyFilter('all', getSearchQuery());
+        render();
         return;
       }
-
       if (pill) {
         const tag = pill.dataset.tag;
         const alreadyActive = pill.classList.contains('is-active');
         tagFilterBar.querySelectorAll('.tag.is-active').forEach(function (t) { t.classList.remove('is-active'); });
         tagFilterBar.querySelector('.tag-filter[data-filter="all"]').classList.remove('is-active');
-
         if (alreadyActive) {
-          activeFilter = 'all';
+          activeTagFilter = 'all';
           tagFilterBar.querySelector('.tag-filter[data-filter="all"]').classList.add('is-active');
         } else {
           pill.classList.add('is-active');
-          activeFilter = tag;
+          activeTagFilter = tag;
         }
-        applyFilter(activeFilter, getSearchQuery());
+        render();
       }
     });
   }
 
-  // ── Homepage: search ─────────────────────────────────────────────────────────
-  const searchInput = document.getElementById('kb-search');
-
-  function getSearchQuery() {
-    return searchInput ? searchInput.value.toLowerCase().trim() : '';
-  }
-
-  function getActiveFilter() {
-    if (!tagFilterBar) return 'all';
-    const active = tagFilterBar.querySelector('.tag.is-active');
-    return active ? active.dataset.tag : 'all';
-  }
-
+  // ── Search input ─────────────────────────────────────────────────────────
   if (searchInput && articleGrid) {
+    // Pre-fetch index on focus so it's ready when typing starts
+    searchInput.addEventListener('focus', function () {
+      if (indexState === 'idle') loadIndex(function () {});
+    }, { once: true });
+
     let debounceTimer;
     searchInput.addEventListener('input', function () {
       clearTimeout(debounceTimer);
       debounceTimer = setTimeout(function () {
-        applyFilter(getActiveFilter(), getSearchQuery());
-      }, 150);
+        const q = searchInput.value.toLowerCase().trim();
+        if (!q) {
+          currentMatchIds = null;
+          render();
+          return;
+        }
+        loadIndex(function () {
+          currentMatchIds = lunrSearch(q);
+          render();
+        });
+      }, 200);
     });
   }
 

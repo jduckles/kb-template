@@ -37,12 +37,14 @@ layout: default
   <section class="articles-section">
     <h2 class="section-title"><i data-feather="book-open"></i> Articles</h2>
     <div class="article-grid" id="article-grid">
-      {% assign published = site.articles | where: "status", "published" %}
-      {% assign drafts_excluded = site.articles | where_exp: "item", "item.status != 'draft'" %}
       {% assign articles_sorted = site.articles | sort: "title" %}
       {% for article in articles_sorted %}
         {% unless article.status == "draft" or article.standalone %}
-        <div class="article-grid__item" data-tags="{{ article.tags | join: ' ' }}" data-title="{{ article.title | downcase }}" data-description="{{ article.description | downcase }}">
+        <div class="article-grid__item"
+             data-url="{{ article.url | relative_url }}"
+             data-tags="{{ article.tags | join: ' ' }}"
+             data-title="{{ article.title | downcase }}"
+             data-description="{{ article.description | downcase }}">
           {% include article-card.html article=article %}
         </div>
         {% endunless %}
@@ -54,3 +56,7 @@ layout: default
 </div>
 
 {{ content }}
+
+<!-- Lunr.js: loaded only on the homepage where search lives -->
+<script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script>
+<script>window.KB_SEARCH_INDEX = "{{ '/search.json' | relative_url }}";</script>
