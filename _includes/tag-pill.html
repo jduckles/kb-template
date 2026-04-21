@@ -10,10 +10,10 @@
   {% endif %}
 {% else %}
   {% if tag_data %}
-    <a class="tag" style="--tag-color: {{ tag_data.color }};" href="{{ '/tags/' | relative_url }}#{{ tag_name }}" data-tag="{{ tag_name }}">
+    <a class="tag" style="--tag-color: {{ tag_data.color }};" href="{{ '/tags/' | relative_url }}{{ tag_name }}/" data-tag="{{ tag_name }}">
       {% if tag_data.emoji %}{{ tag_data.emoji }} {% endif %}{{ tag_data.label | default: tag_name }}
     </a>
   {% else %}
-    <a class="tag" href="{{ '/tags/' | relative_url }}#{{ tag_name }}" data-tag="{{ tag_name }}">{{ tag_name }}</a>
+    <a class="tag" href="{{ '/tags/' | relative_url }}{{ tag_name }}/" data-tag="{{ tag_name }}">{{ tag_name }}</a>
   {% endif %}
 {% endif %}

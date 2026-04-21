@@ -1,0 +1,32 @@
+---
+layout: default
+---
+{% assign tag_name = page.tag %}
+{% assign tag_data = site.data.tags | where: "name", tag_name | first %}
+{% assign tag_articles = site.articles | where_exp: "a", "a.tags contains tag_name and a.standalone != true" | sort: "title" %}
+
+<div class="tags-page">
+  <a class="article-header__back" href="{{ '/tags/' | relative_url }}">
+    <i data-feather="arrow-left"></i> All Tags
+  </a>
+
+  <div class="tag-page-header">
+    {% include tag-pill.html tag=tag_name no_link=true %}
+    {% if tag_data.description %}
+      <p class="tag-page-header__desc">{{ tag_data.description }}</p>
+    {% endif %}
+    <p class="tag-group__count">{{ tag_articles.size }} article{% if tag_articles.size != 1 %}s{% endif %}</p>
+  </div>
+
+  {% if tag_articles.size > 0 %}
+    <div class="article-grid">
+      {% for article in tag_articles %}
+        {% unless article.status == "draft" %}
+          {% include article-card.html article=article %}
+        {% endunless %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="no-results" style="display:block">No published articles with this tag yet.</p>
+  {% endif %}
+</div>

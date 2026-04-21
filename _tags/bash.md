@@ -1,0 +1,4 @@
+---
+tag: bash
+title: "bash"
+---

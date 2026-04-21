@@ -379,6 +379,26 @@
   font-weight: normal;
 }
 
+.tag-group__page-link {
+  text-decoration: none;
+  &:hover .tag { transform: translateY(-1px); }
+}
+
+// ─── Individual tag page header ───────────────────────────────────────────────
+.tag-page-header {
+  margin: $sp6 0 $sp8;
+  padding-bottom: $sp6;
+  border-bottom: 1px solid var(--border);
+
+  .tag { font-size: 1rem; padding: $sp1 $sp4; }
+
+  &__desc {
+    margin-top: $sp3;
+    color: var(--text-muted);
+    font-size: 1rem;
+  }
+}
+
 .tag-group__articles {
   list-style: none;
   margin: 0;

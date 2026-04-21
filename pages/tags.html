@@ -19,7 +19,9 @@ permalink: /tags/
 
     <div class="tag-group" id="{{ tag_name_trim }}">
       <div class="tag-group__header">
-        {% include tag-pill.html tag=tag_name_trim no_link=true %}
+        <a class="tag-group__page-link" href="{{ '/tags/' | relative_url }}{{ tag_name_trim }}/">
+          {% include tag-pill.html tag=tag_name_trim no_link=true %}
+        </a>
         <span class="tag-group__count">{{ tag_articles.size }} article{% if tag_articles.size != 1 %}s{% endif %}</span>
         {% if tag_data.description %}
           <span style="color: var(--text-muted); font-size: 0.875rem;">— {{ tag_data.description }}</span>

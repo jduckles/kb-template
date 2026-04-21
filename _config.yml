@@ -34,6 +34,9 @@ collections:
     output: true
     permalink: /:name/
     sort_by: title
+  tags:
+    output: true
+    permalink: /tags/:name/
 
 defaults:
   - scope:
@@ -43,6 +46,11 @@ defaults:
       layout: article
       status: published
       standalone: false  # true = accessible only via direct URL; hidden from index, tags, and search
+  - scope:
+      path: ""
+      type: tags
+    values:
+      layout: tag
 
 # ─── Plugins ──────────────────────────────────────────────────────────────────
 plugins:
