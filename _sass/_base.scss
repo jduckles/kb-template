@@ -1,3 +1,5 @@
+@use "variables" as *;
+
 // ─── CSS Custom Properties ────────────────────────────────────────────────────
 :root {
   // Brand (overridden by _config.yml injection in head.html)

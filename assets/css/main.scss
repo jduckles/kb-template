@@ -8,8 +8,7 @@
 //   --bg:            #your-bg;
 // }
 
-@import "variables";
-@import "base";
-@import "layout";
-@import "components";
-@import "syntax";
+@use "base";
+@use "layout";
+@use "components";
+@use "syntax";
