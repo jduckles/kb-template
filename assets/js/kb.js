@@ -98,24 +98,25 @@
   const articleGrid = document.getElementById('article-grid');
   const noResults = document.getElementById('no-results');
 
+  function applyFilter(filter, query) {
+    if (!articleGrid) return;
+    const items = articleGrid.querySelectorAll('.article-grid__item');
+    let visible = 0;
+    items.forEach(function (item) {
+      const tags = (item.dataset.tags || '').split(' ');
+      const title = item.dataset.title || '';
+      const desc  = item.dataset.description || '';
+      const matchTag = filter === 'all' || tags.includes(filter);
+      const matchSearch = !query || title.includes(query) || desc.includes(query) || (item.dataset.tags || '').includes(query);
+      const show = matchTag && matchSearch;
+      item.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    if (noResults) noResults.hidden = visible > 0;
+  }
+
   if (tagFilterBar && articleGrid) {
     let activeFilter = 'all';
-
-    function applyFilter(filter, query) {
-      const items = articleGrid.querySelectorAll('.article-grid__item');
-      let visible = 0;
-      items.forEach(function (item) {
-        const tags = (item.dataset.tags || '').split(' ');
-        const title = item.dataset.title || '';
-        const desc  = item.dataset.description || '';
-        const matchTag = filter === 'all' || tags.includes(filter);
-        const matchSearch = !query || title.includes(query) || desc.includes(query) || (item.dataset.tags || '').includes(query);
-        const show = matchTag && matchSearch;
-        item.style.display = show ? '' : 'none';
-        if (show) visible++;
-      });
-      if (noResults) noResults.hidden = visible > 0;
-    }
 
     // Tag pills in filter bar act as filter buttons
     tagFilterBar.addEventListener('click', function (e) {
