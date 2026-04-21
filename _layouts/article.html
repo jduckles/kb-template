@@ -4,9 +4,11 @@ layout: default
 <div class="article-page">
 
   <div class="article-header">
+    {% unless page.standalone %}
     <a class="article-header__back" href="{{ '/' | relative_url }}">
       <i data-feather="arrow-left"></i> Back
     </a>
+    {% endunless %}
     <div class="article-header__emoji" aria-hidden="true">{{ page.emoji | default: "📄" }}</div>
     <h1 class="article-header__title">{{ page.title }}</h1>
     {% if page.description %}
@@ -31,7 +33,7 @@ layout: default
         <span class="article-meta__author"><i data-feather="user"></i> {{ page.author }}</span>
       {% endif %}
     </div>
-    {% if page.tags %}
+    {% if page.tags and page.standalone != true %}
     <div class="article-header__tags">
       {% for tag in page.tags %}
         {% include tag-pill.html tag=tag %}

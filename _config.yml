@@ -42,6 +42,7 @@ defaults:
     values:
       layout: article
       status: published
+      standalone: false  # true = accessible only via direct URL; hidden from index, tags, and search
 
 # ─── Plugins ──────────────────────────────────────────────────────────────────
 plugins:

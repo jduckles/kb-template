@@ -15,8 +15,9 @@ layout: default
 
 <div class="home-content">
 
-  <!-- Tag cloud -->
-  {% assign all_tags = site.articles | map: "tags" | join: "," | split: "," | uniq | sort %}
+  <!-- Tag cloud (excludes standalone articles) -->
+  {% assign visible_articles = site.articles | where_exp: "a", "a.standalone != true" %}
+  {% assign all_tags = visible_articles | map: "tags" | join: "," | split: "," | uniq | sort %}
   {% if all_tags.size > 0 %}
   <section class="tag-cloud-section">
     <h2 class="section-title"><i data-feather="tag"></i> Browse by Tag</h2>
@@ -40,7 +41,7 @@ layout: default
       {% assign drafts_excluded = site.articles | where_exp: "item", "item.status != 'draft'" %}
       {% assign articles_sorted = site.articles | sort: "title" %}
       {% for article in articles_sorted %}
-        {% unless article.status == "draft" %}
+        {% unless article.status == "draft" or article.standalone %}
         <div class="article-grid__item" data-tags="{{ article.tags | join: ' ' }}" data-title="{{ article.title | downcase }}">
           {% include article-card.html article=article %}
         </div>

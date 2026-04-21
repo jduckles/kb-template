@@ -108,6 +108,25 @@ Set `status: draft` to prevent an article from appearing on the homepage or tag 
 Draft articles are not hidden from search engines — they just won't appear in the site's navigation. Don't publish secrets in draft articles.
 </div>
 
+## Standalone Articles
+
+Set `standalone: true` to make an article accessible only via its direct URL. It won't appear in the homepage grid, tag pages, or the tag filter bar — it's essentially unlisted.
+
+```yaml
+standalone: true
+```
+
+Use this for:
+- Internal processes or checklists shared with a specific audience
+- Draft content you want to preview at its real URL before publishing
+- Supplemental material linked from another article but not worth indexing on its own
+
+<div class="callout callout-note" markdown="1">
+**📝 Note**
+
+Standalone articles are not password-protected — anyone with the URL can read them. They're simply not discoverable through the site's navigation. Don't put secrets in them.
+</div>
+
 ## Marking Articles Outdated
 
 Rather than deleting articles, set `status: outdated`. A visual badge will warn readers, and the article will still be findable. Update it when the information becomes current again.

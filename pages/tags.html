@@ -14,7 +14,7 @@ permalink: /tags/
     {% assign tag_name_trim = tag_name | strip %}
     {% if tag_name_trim == "" %}{% continue %}{% endif %}
     {% assign tag_data = site.data.tags | where: "name", tag_name_trim | first %}
-    {% assign tag_articles = site.articles | where_exp: "a", "a.tags contains tag_name_trim" | sort: "title" %}
+    {% assign tag_articles = site.articles | where_exp: "a", "a.tags contains tag_name_trim and a.standalone != true" | sort: "title" %}
     {% if tag_articles.size == 0 %}{% continue %}{% endif %}
 
     <div class="tag-group">
@@ -27,7 +27,7 @@ permalink: /tags/
       </div>
       <ul class="tag-group__articles">
         {% for article in tag_articles %}
-          {% unless article.status == "draft" %}
+          {% unless article.status == "draft" or article.standalone %}
           <li class="tag-group__article">
             <span class="emoji">{{ article.emoji | default: "📄" }}</span>
             <a href="{{ article.url | relative_url }}">{{ article.title }}</a>

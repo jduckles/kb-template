@@ -94,6 +94,18 @@ Any tag used in an article but not in `_data/tags.yml` will still display — ju
 
 ---
 
+## Standalone (Unlisted) Articles
+
+Set `standalone: true` in an article's front matter to make it accessible only via direct URL. It won't appear in the homepage grid, tag pages, or tag filter bar.
+
+```yaml
+standalone: true
+```
+
+Good for internal checklists, preview drafts, or supplementary material linked from other articles but not worth indexing on its own.
+
+---
+
 ## Deploying to GitHub Pages
 
 1. Push this repo to GitHub
