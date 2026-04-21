@@ -108,17 +108,15 @@
   border: 1px solid var(--border);
   border-radius: $r-lg;
   padding: $sp6;
-  text-decoration: none;
   color: var(--text);
   transition: box-shadow $t-base, transform $t-base, border-color $t-base;
   height: 100%;
+  position: relative; // anchor for stretched-link
 
   &:hover {
     box-shadow: 0 8px 24px rgba(0,0,0,.1);
     transform: translateY(-2px);
     border-color: var(--brand-primary);
-    text-decoration: none;
-    color: var(--text);
   }
 }
 
@@ -132,8 +130,27 @@
   font-size: 1.05rem;
   font-weight: 600;
   margin: 0 0 $sp2;
-  color: var(--text);
   line-height: 1.4;
+}
+
+// Stretched link: makes the whole card clickable via the title anchor,
+// while leaving tag pills (position: relative) clickable independently.
+.article-card__link {
+  color: var(--text);
+  text-decoration: none;
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: $r-lg;
+  }
+  &:hover { color: var(--text); text-decoration: none; }
+}
+
+// Tag pills and badges inside cards sit above the stretched link overlay.
+.article-card__meta {
+  position: relative;
+  z-index: 1;
 }
 
 .article-card__desc {

@@ -26,7 +26,7 @@ layout: default
       {% for tag in all_tags %}
         {% assign tag_trim = tag | strip %}
         {% if tag_trim != "" %}
-          {% include tag-pill.html tag=tag_trim %}
+          {% include tag-pill.html tag=tag_trim no_link=true %}
         {% endif %}
       {% endfor %}
     </div>

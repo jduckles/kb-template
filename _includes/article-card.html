@@ -1,8 +1,10 @@
 {% assign art = include.article %}
-<a class="article-card" href="{{ art.url | relative_url }}">
+<div class="article-card">
   <div class="article-card__emoji" aria-hidden="true">{{ art.emoji | default: "📄" }}</div>
   <div class="article-card__body">
-    <h2 class="article-card__title">{{ art.title }}</h2>
+    <h2 class="article-card__title">
+      <a class="article-card__link" href="{{ art.url | relative_url }}">{{ art.title }}</a>
+    </h2>
     {% if art.description %}
       <p class="article-card__desc">{{ art.description }}</p>
     {% endif %}
@@ -17,4 +19,4 @@
       {% endif %}
     </div>
   </div>
-</a>
+</div>

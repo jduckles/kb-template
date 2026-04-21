@@ -1,9 +1,19 @@
 {% assign tag_name = include.tag %}
 {% assign tag_data = site.data.tags | where: "name", tag_name | first %}
-{% if tag_data %}
-  <span class="tag" style="--tag-color: {{ tag_data.color }};" data-tag="{{ tag_name }}">
-    {% if tag_data.emoji %}{{ tag_data.emoji }} {% endif %}{{ tag_data.label | default: tag_name }}
-  </span>
+{% if include.no_link %}
+  {% if tag_data %}
+    <span class="tag" style="--tag-color: {{ tag_data.color }};" data-tag="{{ tag_name }}">
+      {% if tag_data.emoji %}{{ tag_data.emoji }} {% endif %}{{ tag_data.label | default: tag_name }}
+    </span>
+  {% else %}
+    <span class="tag" data-tag="{{ tag_name }}">{{ tag_name }}</span>
+  {% endif %}
 {% else %}
-  <span class="tag" data-tag="{{ tag_name }}">{{ tag_name }}</span>
+  {% if tag_data %}
+    <a class="tag" style="--tag-color: {{ tag_data.color }};" href="{{ '/tags/' | relative_url }}#{{ tag_name }}" data-tag="{{ tag_name }}">
+      {% if tag_data.emoji %}{{ tag_data.emoji }} {% endif %}{{ tag_data.label | default: tag_name }}
+    </a>
+  {% else %}
+    <a class="tag" href="{{ '/tags/' | relative_url }}#{{ tag_name }}" data-tag="{{ tag_name }}">{{ tag_name }}</a>
+  {% endif %}
 {% endif %}

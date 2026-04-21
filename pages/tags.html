@@ -17,9 +17,9 @@ permalink: /tags/
     {% assign tag_articles = site.articles | where_exp: "a", "a.tags contains tag_name_trim and a.standalone != true" | sort: "title" %}
     {% if tag_articles.size == 0 %}{% continue %}{% endif %}
 
-    <div class="tag-group">
+    <div class="tag-group" id="{{ tag_name_trim }}">
       <div class="tag-group__header">
-        {% include tag-pill.html tag=tag_name_trim %}
+        {% include tag-pill.html tag=tag_name_trim no_link=true %}
         <span class="tag-group__count">{{ tag_articles.size }} article{% if tag_articles.size != 1 %}s{% endif %}</span>
         {% if tag_data.description %}
           <span style="color: var(--text-muted); font-size: 0.875rem;">— {{ tag_data.description }}</span>
