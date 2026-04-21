@@ -3,7 +3,7 @@ title: "Community Knowledge Base"
 tagline: "Learn, share, grow together"
 description: "A collaborative knowledge base for your community of practice."
 baseurl: ""   # set to "/repo-name" for GitHub Pages project sites
-url: ""       # e.g., "https://yourorg.github.io"
+url: "https://jduckles.github.io/kb-template"       # e.g., "https://yourorg.github.io"
 
 # ─── Branding ─────────────────────────────────────────────────────────────────
 # All colors accept any valid CSS color value (hex, hsl, rgb, named)
