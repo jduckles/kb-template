@@ -42,7 +42,7 @@ layout: default
       {% assign articles_sorted = site.articles | sort: "title" %}
       {% for article in articles_sorted %}
         {% unless article.status == "draft" or article.standalone %}
-        <div class="article-grid__item" data-tags="{{ article.tags | join: ' ' }}" data-title="{{ article.title | downcase }}">
+        <div class="article-grid__item" data-tags="{{ article.tags | join: ' ' }}" data-title="{{ article.title | downcase }}" data-description="{{ article.description | downcase }}">
           {% include article-card.html article=article %}
         </div>
         {% endunless %}

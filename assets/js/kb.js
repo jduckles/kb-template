@@ -107,8 +107,9 @@
       items.forEach(function (item) {
         const tags = (item.dataset.tags || '').split(' ');
         const title = item.dataset.title || '';
+        const desc  = item.dataset.description || '';
         const matchTag = filter === 'all' || tags.includes(filter);
-        const matchSearch = !query || title.includes(query) || (item.dataset.tags || '').includes(query);
+        const matchSearch = !query || title.includes(query) || desc.includes(query) || (item.dataset.tags || '').includes(query);
         const show = matchTag && matchSearch;
         item.style.display = show ? '' : 'none';
         if (show) visible++;
@@ -165,20 +166,7 @@
     searchInput.addEventListener('input', function () {
       clearTimeout(debounceTimer);
       debounceTimer = setTimeout(function () {
-        const q = getSearchQuery();
-        const f = getActiveFilter();
-        const items = articleGrid.querySelectorAll('.article-grid__item');
-        let visible = 0;
-        items.forEach(function (item) {
-          const tags = (item.dataset.tags || '');
-          const title = item.dataset.title || '';
-          const matchTag = f === 'all' || tags.split(' ').includes(f);
-          const matchSearch = !q || title.includes(q) || tags.includes(q);
-          const show = matchTag && matchSearch;
-          item.style.display = show ? '' : 'none';
-          if (show) visible++;
-        });
-        if (noResults) noResults.hidden = visible > 0;
+        applyFilter(getActiveFilter(), getSearchQuery());
       }, 150);
     });
   }
